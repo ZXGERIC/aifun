@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRC Solutions | Governance, Risk & Compliance Management</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #1a252f);
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Solutions Section */
+        .solutions {
+            background-color: var(--light);
+        }
+        
+        .solutions-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 3px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .solution-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .solution-card:hover .solution-img img {
+            transform: scale(1.1);
+        }
+        
+        .solution-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .solution-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .solution-info .btn {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background-color: white;
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--secondary);
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .testimonial-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--secondary), #2980b9);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #bbb;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: all 0.5s ease;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/40x40" alt="GRC Solutions Logo">
+                <h1>GRC<span>Solutions</span></h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="btn btn-accent">Demo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Transform Your Governance, Risk & Compliance</h1>
+            <p>Comprehensive GRC solutions to streamline compliance, mitigate risks, and enhance corporate governance across your organization.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn">Request Demo</a>
+                <a href="#" class="btn btn-accent">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Our GRC Platform</h2>
+                <p>Our integrated approach to governance, risk management and compliance delivers measurable results across all industries.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Risk Management</h3>
+                    <p>Identify, assess and mitigate risks with our comprehensive risk management framework and real-time monitoring.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Compliance Automation</h3>
+                    <p>Automate compliance processes across multiple regulations including GDPR, SOX, HIPAA and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Policy Management</h3>
+                    <p>Centralize policy creation, distribution, attestation and version control with full audit trails.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>Audit Management</h3>
+                    <p>Streamline audit processes from planning to execution with automated workflows and reporting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Third-Party Risk</h3>
+                    <p>Assess and monitor vendor risks throughout the entire relationship lifecycle.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Analytics & Reporting</h3>
+                    <p>Powerful dashboards and customizable reports provide actionable insights for decision makers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="section solutions" id="solutions">
+        <div class="container">
+            <div class="section-title">
+                <h2>Industry-Specific GRC Solutions</h2>
+                <p>Tailored solutions designed to address the unique governance, risk and compliance challenges of your industry.</p>
+            </div>
+            <div class="solutions-tabs">
+                <button class="tab-btn active" data-tab="financial">Financial Services</button>
+                <button class="tab-btn" data-tab="healthcare">Healthcare</button>
+                <button class="tab-btn" data-tab="technology">Technology</button>
+                <button class="tab-btn" data-tab="government">Government</button>
+            </div>
+            <div class="tab-content active" id="financial-tab">
+                <div class="features-grid">
+                    <div class="solution-card">
+                        <div class="solution-img">
+                            <img src="https://via.placeholder.com/600x400?text=Banking+Compliance" alt="Banking Compliance">
+                        </div>
+                        <div class="solution-info">
+                            <h3>Banking Compliance Suite</h3>
+                            <p>Comprehensive solution for Basel III, Dodd-Frank, AML, KYC and other banking regulations with automated reporting.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-img">
+                            <img src="https://via.placeholder.com/600x400?text=Insurance+Risk" alt="Insurance Risk">
+                        </div>
+                        <div class="solution-info">
+                            <h3>Insurance Risk Management</h3>
+                            <p>End-to-end risk management solution for insurers including ORSA compliance, catastrophe modeling and more.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-img">
+                            <img src="https://via.placeholder.com/600x400?text=FinTech+GRC" alt="FinTech GRC">
+                        </div>
+                        <div class="solution-info">
+                            <h3>FinTech GRC Platform</h3>
+                            <p>Specialized solution for digital financial services addressing PSD2, Open Banking, cybersecurity and operational risks.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="healthcare-tab">
+                <div class="features-grid">
+                    <div class="solution-card">
+                        <div class="solution-img">
+                            <img src="https://via.placeholder.com/600x400?text=HIPAA+Compliance" alt="HIPAA Compliance">
+                        </div>
+                        <div class="solution-info">
+                            <h3>HIPAA Compliance Manager</h3>
+                            <p>Streamline compliance with HIPAA Privacy and Security Rules including risk assessments and breach notification.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-img">
+                            <img src="https://via.placeholder.com/600x400?text=Healthcare+Risk" alt="Healthcare Risk">
+                        </div>
+                        <div class="solution-info">
+                            <h3>Healthcare Risk Intelligence</h3>
+                            <p>Identify and mitigate clinical, operational and financial risks across healthcare organizations.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-img">
+                            <img src="https://via.placeholder.com/600x400?text=Medical+Device" alt="Medical Device">
+                        </div>
+                        <div class="solution-info">
+                            <h3>Medical Device Compliance</h3>
+                            <p>End-to-end solution for FDA regulations, ISO 13485, EU MDR and other medical device requirements.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Clients Say</h2>
+                <p>Hear from organizations that have transformed their GRC programs with our solutions.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/150x150?text=CEO" alt="John Smith">
+                    <p>"Implementing GRCSolutions transformed our compliance operations. We reduced audit findings by 65% in the first year while cutting compliance costs by 30%."</p>
+                    <div class="testimonial-author">John Smith</div>
+                    <div class="testimonial-role">Chief Compliance Officer, Global Bank</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your GRC Program?</h2>
+            <p>Schedule a personalized demo to see how our platform can streamline your governance, risk and compliance processes.</p>
+            <a href="#" class="btn btn-accent">Request Demo</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <img src="https://via.placeholder.com/40x40" alt="GRC Solutions Logo">
+                        <h1>GRC<span>Solutions</span></h1>
+                    </div>
+                    <p style="margin-top: 20px; color: #bbb;">Leading provider of integrated governance, risk and compliance solutions since 2010.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="#">Risk Management</a></li>
+                        <li><a href="#">Compliance Automation</a></li>
+                        <li><a href="#">Policy Management</a></li>
+                        <li><a href="#">Audit Management</a></li>
+                        <li><a href="#">Third-Party Risk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Whitepapers</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Compliance Calendar</a></li>
+                        <li><a href="#">Industry Reports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 GRC Street, Suite 500, San Francisco, CA 94107</p>
+                        <p><i class="fas fa-phone"></i> (800) 555-GRCS</p>
+                        <p><i class="fas fa-envelope"></i> info@grcsolutions.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 GRCSolutions. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if(this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if(navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+        
+        // Sticky header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
